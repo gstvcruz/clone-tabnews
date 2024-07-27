@@ -1,9 +1,16 @@
-import { Pool } from "pg";
-
-const pool = new Pool();
+import { Client } from "pg";
 
 async function query(queryObject) {
-  return await pool.query(queryObject);
+  const client = new Client();
+  try {
+    await client.connect();
+    return await client.query(queryObject);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    await client.end();
+  }
 }
 
 exports.database = {

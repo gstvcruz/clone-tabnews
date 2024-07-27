@@ -4,7 +4,7 @@
   "description": "Clone do tabnews.com.br para o curso.dev",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run docker:up && next dev",
+    "dev": "next dev",
     "lint:check": "prettier --check .",
     "lint:write": "prettier --write .",
     "test": "jest",
