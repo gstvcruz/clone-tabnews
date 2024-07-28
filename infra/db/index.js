@@ -1,7 +1,15 @@
 import { Client } from "pg";
 
+function getSSLValues() {
+  return process.env.PGCA
+    ? { ca: process.PGCA }
+    : process.env.NODE_ENV === "development"
+      ? false
+      : true;
+}
+
 const config = {
-  ssl: process.env.NODE_ENV === "development" ? false : true,
+  ssl: getSSLValues(),
 };
 
 async function query(queryObject) {
