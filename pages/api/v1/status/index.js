@@ -16,12 +16,12 @@ async function getOpenedConnections() {
   const query = `SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;`;
   const result = await database.query({
     text: query,
-    values: [process.env.PGDATABASE],
+    values: [process.env.POSTGRES_DB],
   });
   return result.rows[0].count;
 }
 
-async function status(request, response) {
+export default async function status(request, response) {
   response.status(200).json({
     updated_at: new Date().toISOString(),
     dependencies: {
@@ -33,5 +33,3 @@ async function status(request, response) {
     },
   });
 }
-
-export default status;
